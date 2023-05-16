@@ -11,12 +11,12 @@ React-FilterBlocks is a project focused on implementing block filtering function
 + Git hooks with Husky for pre-commit and pre-push checks
 + Read and display data from a JSON file
 
-## Installation
+## Installation 
 + Clone the repository: git clone https://github.com/AnastasiaPanysh/React-FilterBlocks.git
 + Install dependencies: npm install
 
 ## Usage
-+ Start the development server: npm run dev
++ Start the development server: npm run dev 
 + Access the application in your browser at http://localhost:5173/
 
 ## Contributing
