@@ -1,0 +1,55 @@
+.wrapper {
+  background: #ffffff;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+
+  .wrapper-wdth {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+  }
+
+  .wrapper-logo {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      background-image: url(./assets/Union.svg);
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .jobored {
+      font: 600 24px "Poppins";
+      line-height: 36px;
+      color: #232134;
+    }
+  }
+
+  .wrapper-nav {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font: 500 16px "Inter";
+      line-height: 20px;
+      color: #232134;
+    }
+
+    a:hover {
+      color: #5e96fc;
+    }
+
+    p:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
+}
