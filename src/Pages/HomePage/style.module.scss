@@ -1,6 +1,10 @@
 .wrapper {
     margin-top: 7%;
-
+    
+    .preview {
+      display: flex;
+      justify-content: space-between;
+    }
   
       .content {
         width: 65%;

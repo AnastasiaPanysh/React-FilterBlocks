@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { Pagination } from "@mantine/core";
 import style from "./style.module.scss";
 import Item from "./Item";
@@ -8,8 +8,6 @@ function Content({ searchString }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSizeRef = useRef(4);
   const [list, setList] = useState([]);
-
-
   const [vacancies, setVacancies] = useState([]);
 
   useEffect(() => {
@@ -23,7 +21,6 @@ function Content({ searchString }) {
                 "v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948",
               "Content-Type": "application/x-www-form-urlencoded",
               Authorization: `Bearer v3.r.137565249.e28e5c69be8e4ff7a749fb84d229f26fe69ec495.0377f2eaf1672c1d2ec04c6cedf2910e21f3ebdd`,
-              // 'Authorization': `Bearer ${accessToken}`
             },
           }
         );
@@ -35,35 +32,37 @@ function Content({ searchString }) {
       }
     };
 
-    // performAuthorization();
     fetchVacancies();
   }, []);
-
-  function filterVacancy() {
-    if (!searchString) return vacancies;
-
-    return vacancies.filter(({ profession}) => {
-      const lowerCaseVacancy = profession.toLowerCase();
-      return (
-        (!searchString || lowerCaseVacancy.includes(searchString.toLowerCase()))
-      );
-    });
-  };
-
-  
-
-  const paginatedList = filterVacancy().slice(
-    (currentPage - 1) * pageSizeRef.current,
-    currentPage * pageSizeRef.current
-  );
-
 
   useEffect(() => {
     setList(filterVacancy());
     setCurrentPage(1);
-  }, [searchString]);
+  }, [searchString, vacancies]);
 
+  function filterVacancy() {
+    if (!searchString) return vacancies;
 
+    return vacancies.filter(({ profession }) => {
+      const lowerCaseVacancy = profession.toLowerCase();
+      return (
+        !searchString || lowerCaseVacancy.includes(searchString.toLowerCase())
+      );
+    });
+  }
+
+  const paginatedList = useMemo(
+    () =>
+      list.slice(
+        (currentPage - 1) * pageSizeRef.current,
+        currentPage * pageSizeRef.current
+      ),
+    [list, currentPage]
+  );
+
+  const handlePageChange = useCallback((page) => {
+    setCurrentPage(page);
+  }, []);
 
   return (
     <>
@@ -73,11 +72,12 @@ function Content({ searchString }) {
       <Pagination
         total={Math.ceil(list.length / pageSizeRef.current)}
         value={currentPage}
-        onChange={(page) => setCurrentPage(page)}
+        onChange={handlePageChange}
         position="center"
       />
     </>
   );
 }
+
 
 export default Content;
