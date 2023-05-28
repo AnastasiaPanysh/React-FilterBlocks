@@ -9,7 +9,7 @@ React-FilterBlocks is a project focused on implementing block filtering function
 + Built with React, JavaScript, CSS
 + Automatic code formatting with Prettier
 + Git hooks with Husky for pre-commit and pre-push checks
-+ Read and display data from a JSON file
++ Read and display data from a JSON file   
 
 ## Installation 
 + Clone the repository: git clone https://github.com/AnastasiaPanysh/React-FilterBlocks.git
